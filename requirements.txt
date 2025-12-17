@@ -1,6 +1,5 @@
-pandas
-xlrd
-matplotlib
-seaborn
 streamlit
-openpyxl
+pandas
+plotly
+numpy
+statsmodels
