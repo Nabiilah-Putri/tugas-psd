@@ -37,9 +37,19 @@ try:
 
     with col2:
         st.subheader(f"Tren Kriminalitas di {negara_dipilih}")
-        st.info("Visualisasi tingkat kriminalitas akan muncul di sini setelah data kriminalitas dihubungkan.")
-        # Contoh visualisasi jika data kriminalitas sudah ada:
-        st.line_chart(df_krim[df_krim['Negara'] == negara_dipilih]['Angka_Kriminalitas'])
+        
+        # Filter data kriminalitas sesuai negara yang dipilih
+        data_krim_negara = df_krim[df_krim['Negara'] == negara_dipilih]
+        
+        if not data_krim_negara.empty:
+            # Coba menampilkan grafik, jika kolom 'Angka_Kriminalitas' ada
+            if 'Angka_Kriminalitas' in df_krim.columns:
+                st.line_chart(data_krim_negara['Angka_Kriminalitas'])
+            else:
+                st.warning("Kolom 'Angka_Kriminalitas' tidak ditemukan di file CSV.")
+                st.write("Kolom yang tersedia adalah:", list(df_krim.columns))
+        else:
+            st.warning(f"Data kriminalitas untuk negara {negara_dipilih} tidak ditemukan dalam file CSV.")
 
     st.divider()
     
@@ -53,4 +63,5 @@ try:
 except Exception as e:
     st.error(f"Terjadi kesalahan: {e}")
     st.info("Pastikan file excel sudah diupload ke GitHub.")
+
 
