@@ -53,3 +53,4 @@ try:
 except Exception as e:
     st.error(f"Terjadi kesalahan: {e}")
     st.info("Pastikan file excel sudah diupload ke GitHub.")
+
